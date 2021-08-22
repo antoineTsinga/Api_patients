@@ -1,0 +1,67 @@
+import { Select, MenuItem } from "@material-ui/core";
+import countries from "i18n-iso-countries";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+//Import the languages you want to use
+import enLocale from "i18n-iso-countries/langs/en.json";
+import frLocale from "i18n-iso-countries/langs/fr.json";
+
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    marginBottom: theme.spacing(1),
+      marginRight: theme.spacing(3),
+      marginLeft: theme.spacing(3),
+      width: '50ch',
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+export default function CountrySelect() {
+  const classes = useStyles();
+  const [selectedCountry, setSelectedCountry] = React.useState('');
+  const selectCountryHandler = (event) => {
+    setSelectedCountry(event.target.value);
+  };
+
+  // Have to register the languages you want to use
+  countries.registerLocale(enLocale);
+  countries.registerLocale(frLocale);
+
+  // Returns an object not a list
+  const countryObj = countries.getNames("en", { select: "official" });
+
+  const countryArr = Object.entries(countryObj).map(([key, value]) => {
+    return {
+      label: value,
+      value: key
+    };
+  });
+
+  return (
+    <div>
+      <FormControl required className={classes.formControl}>
+        <InputLabel id="demo-simple-select-required-label">Pays</InputLabel>
+        <Select
+          labelId="demo-simple-select-required-label"
+          id="demo-simple-select-required"
+          style={{ width: "150px" }}
+          value={selectedCountry}
+          onChange={selectCountryHandler}
+          className={classes.selectEmpty}
+        >
+          {!!countryArr?.length &&
+            countryArr.map(({ label, value }) => (
+              <MenuItem key={value} value={value}>
+                {label}
+              </MenuItem>
+            ))}
+        </Select>
+      </FormControl>
+    </div>
+  );
+}

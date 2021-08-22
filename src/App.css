@@ -7,6 +7,22 @@
   pointer-events: none;
 }
 
+::-webkit-scrollbar{
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius: 25px;
+  background:rgb(121, 77, 77, 0.25);
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:rgb(121, 77, 77, 0.5);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

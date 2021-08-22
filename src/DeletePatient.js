@@ -6,17 +6,16 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function DeletePatient({listPatients, updateList, open1, setOpen1, id}) {
+function DeletePatient({ listPatients, updateList, open1, setOpen1, id }) {
   const handleClose1 = () => {
     setOpen1(false);
-    console.log(id)
   };
 
-  function deleteChoice(){
+  function deleteChoice() {
 
-     const newList = listPatients.filter( pat => pat._id !== id );
-        updateList(newList);
-        setOpen1(false)
+    const newList = listPatients.filter(pat => pat._id !== id);
+    updateList(newList);
+    setOpen1(false)
   }
 
   return (
